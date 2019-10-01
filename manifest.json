@@ -24,12 +24,18 @@
     },
     "content_scripts": [
         {
-          "matches": [
-            "https://www.google.com/"
-          ],
-          "js": ["decorator.js"]
+            "matches": [
+                "https://xxx.atlassian.net/jira/software/projects/*"
+            ],
+            "js": [
+                "toastify.js",
+                "predictor.js"
+            ],
+            "css": [
+                "toastify.css"
+            ]
         }
-      ],
+    ],
     "icons": {
         "16": "images/get_started16.png",
         "32": "images/get_started32.png",
