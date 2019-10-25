@@ -25,7 +25,7 @@
     "content_scripts": [
         {
             "matches": [
-                "https://xxx.atlassian.net/jira/software/projects/*"
+                "https://xxx.atlassian.net/secure/RapidBoard.jspa*"
             ],
             "js": [
                 "toastify.js",

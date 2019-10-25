@@ -39,18 +39,21 @@ function predict(velocity) {
     restSprintCount = parseInt(diffDay / 14);
     var februaryYearCompletablePoint = restSprintCount * velocity
 
-    const backlogDivList = document.getElementsByXPath('//*[@id="helpPanelContainer"]/div/div[2]/div[2]/div[1]/div/div[2]/div/div/div/div[3]/div[2]/div[1]')[0].children;
+    const backlogDivList = document.getElementsByClassName('js-issue-list ghx-issues ghx-has-issues')[1].children;
 
     var sprintStoryPoint = 0;
     var endYearChecked = false;
 
     for (var i = 0; i < backlogDivList.length; i++) {
-        if (backlogDivList[i].outerText === '') { // 課題の行ではない場合
+        const record = backlogDivList[i];
+        if (!record.classList.contains('js-issue')) {
             continue;
         }
-        const record = backlogDivList[i];
-        const texts = record.firstElementChild.outerText.split('\n')
-        storyPoint = parseInt(texts[texts.length - 1])
+        storyPointText = record.getElementsByClassName('aui-badge ghx-statistic-badge')[0].innerText
+        let storyPoint = 0;
+        if (storyPointText !== '-') {
+            storyPoint = parseInt(storyPointText);
+        }
         if (sprintStoryPoint + storyPoint > februaryYearCompletablePoint) {
             record.prepend(createBorderElement('2020年2月末', sprintStoryPoint))
             break;
